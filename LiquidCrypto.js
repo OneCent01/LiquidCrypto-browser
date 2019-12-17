@@ -65,4 +65,4 @@ const LiquidCrypto = async (keypair) => {
 	}
 }
 
-export default LiquidCrypto
+module.exports = { LiquidCrypto }

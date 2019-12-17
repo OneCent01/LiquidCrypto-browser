@@ -1,5 +1,5 @@
 // local import test: 
-import LiquidCrypto from 'liquidcrypto-browser'
+import {LiquidCrypto} from 'liquidcrypto-browser'
 
 const init = async () => {
 
