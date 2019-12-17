@@ -1,5 +1,6 @@
 // local import test: 
-import LiquidCrypto from '../../LiquidCrypto.js'
+import LiquidCrypto from 'liquidcrypto-browser'
+
 const init = async () => {
 
 	// instantiate keypairs

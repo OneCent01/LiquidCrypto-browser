@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "liquidcrypto": "^1.1.4",
+    "liquidcrypto-browser": "^1.0.0",
     "webpack": "^4.41.3"
   }
 }
