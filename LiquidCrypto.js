@@ -1,3 +1,15 @@
+const ab2str = buf => String.fromCharCode.apply(null, new Uint8Array(buf))
+
+const str2ab =  str => {
+  const buf = new ArrayBuffer(str.length),
+    bufView = new Uint8Array(buf)
+  let i = str.length
+  while(i--) {
+    bufView[i] = str.charCodeAt(i)
+  }
+  return buf
+}
+
 const LiquidCrypto = async (keypair) => {
 	const generateKeys = () => crypto.subtle.generateKey(
 	    {
@@ -38,10 +50,7 @@ const LiquidCrypto = async (keypair) => {
 			key,
 			dataBuffer
 		)
-
-		const ivEncryptedBlob = new Blob([iv, encrypted])
-		const ivEncryptedBuffer = await (await new Response(ivEncryptedBlob)).arrayBuffer()
-		return ivEncryptedBuffer
+		return `${ab2str(iv)}${ab2str(encrypted)}`
 	}
 
 	const decrypt = async (data, key) => {
@@ -50,10 +59,10 @@ const LiquidCrypto = async (keypair) => {
 		return new TextDecoder().decode(await crypto.subtle.decrypt(
 			{
 				name: "AES-GCM",
-				iv
+				iv: str2ab(iv)
 			},
 			key,
-			encData
+			str2ab(encData)
 		))
 	}
 
