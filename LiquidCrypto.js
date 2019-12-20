@@ -44,19 +44,19 @@ const LiquidCrypto = async (options={}) => {
 	const encrypt = async (data, key) => {
 		liqLog('Encrypt data: ', data)
 		const iv = crypto.getRandomValues(new Uint8Array(12))
-		liqLog('iv: ', iv)
+		liqLog('iv: ', ab2str(iv))
 		const dataBuffer = new TextEncoder().encode(data).buffer
 		liqLog('dataBuffer: ', dataBuffer)
-		const encrypted = await crypto.subtle.encrypt(
+		const encrypted = ab2str(await crypto.subtle.encrypt(
 			{
 				name: 'AES-GCM',
 				iv
 			},
 			key,
 			dataBuffer
-		)
+		))
 		liqLog('encrypted: ', encrypted)
-		const ivEncrypted = `${ab2str(iv)}${ab2str(encrypted)}`
+		const ivEncrypted = `${ab2str(iv)}${encrypted}`
 		liqLog('iv + encrypted: ', ivEncrypted)
 		return ivEncrypted
 	}
