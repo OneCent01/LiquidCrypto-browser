@@ -12,7 +12,7 @@ const str2ab =  str => {
 
 const LiquidCrypto = async (options={}) => {
 	const { keypair, log } = options
-	const liqLog = () => log ? console.log.apply(null, arguments) : null
+	const liqLog = (...args) => log ? console.log(...args) : null
 	const generateKeys = () => crypto.subtle.generateKey(
 	    {
 	        name: "ECDH",
